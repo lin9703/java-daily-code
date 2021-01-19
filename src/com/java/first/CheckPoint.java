@@ -11,18 +11,18 @@ import java.util.StringTokenizer;
 public class CheckPoint {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+		StringTokenizer st;
 
-        st = new StringTokenizer(br.readLine());
-        int tall = Integer.parseInt(st.nextToken());
-        int weight = Integer.parseInt(st.nextToken());
-        
-        int bmi = weight + 100 - tall;
-        
-        System.out.printf("비만수치는 %d입니다.\n", bmi);
-        
-        if(bmi > 0) {
-        	System.out.println("당신은 비만이군요");
-        }
+		st = new StringTokenizer(br.readLine());
+		int tall = Integer.parseInt(st.nextToken());
+		int weight = Integer.parseInt(st.nextToken());
+
+		int bmi = weight + 100 - tall;
+
+		System.out.printf("비만수치는 %d입니다.\n", bmi);
+
+		if (bmi > 0) {
+			System.out.println("당신은 비만이군요");
+		}
 	}
 }
