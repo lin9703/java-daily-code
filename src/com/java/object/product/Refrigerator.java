@@ -1,5 +1,8 @@
 package com.java.object.product;
 
+/*
+ * Constructor, Encapsulation, toString() 적용 
+ */
 public class Refrigerator extends Electronics {
 	private int capacity;
 
