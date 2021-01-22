@@ -1,5 +1,7 @@
 package com.java.object.product1;
 
+import java.util.Arrays;
+
 public class ProductMgr {
 	private static int MAX_SIZE = 100;
 	private Product[] products = new Product[MAX_SIZE];
@@ -24,21 +26,18 @@ public class ProductMgr {
 	}
 
 	// 저장된 상품 조회
-	public void list() {
-		System.out.println("----상품 조회----");
-		for (int i = 0; i < cnt; i++) {
-			System.out.println(products[i]);
-		}
+	public Product[] list() {
+		return Arrays.copyOf(products, cnt);
 	}
 
 	// 상품 번호로 검색
-	public void list(int num) {
-		System.out.println("----검색 결과----");
+	public Product list(int num) {
 		for (int i = 0; i < cnt; i++) {
 			if (products[i].getProductNo() == num) {
-				System.out.println(products[i]);
+				return products[i];
 			}
 		}
+		return null;
 	}
 
 	// 상품 번호로 삭제
@@ -53,13 +52,23 @@ public class ProductMgr {
 	}
 
 	// 특정가격 이하의 상품만 조회
-	public void priceList(int price) {
-		System.out.println("----검색 결과----");
+	public Product[] priceList(int price) {
+		int count = 0;
 		for (int i = 0; i < cnt; i++) {
 			if (products[i].getPrice() <= price) {
-				System.out.println(products[i]);
+				count++;
 			}
 		}
+
+		Product[] result = new Product[count];
+		int temp = 0;
+		for (int i = 0; i < cnt; i++) {
+			if (products[i].getPrice() <= price) {
+				result[temp++] = products[i];
+			}
+		}
+
+		return result;
 	}
 
 }

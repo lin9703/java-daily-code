@@ -26,23 +26,37 @@ public class ProductTest {
 		}
 
 		// 상품 조회
-		management.list();
+		Product[] list = management.list();
+		System.out.println("----상품 조회----");
+		for (Product p : list) {
+			System.out.println(p);
+		}
 
 		// 상품 번호로 검색
 		System.out.println("\n검색하고자 하는 상품의 상품번호를 적어주세요.");
 		st = new StringTokenizer(br.readLine());
-		management.list(Integer.parseInt(st.nextToken()));
+		System.out.println("----검색 결과----");
+		System.out.println(management.list(Integer.parseInt(st.nextToken())));
 
 		// 상품 번호로 삭제
 		System.out.println("\n삭제하고자 하는 상품의 상품번호를 적어주세요.");
 		st = new StringTokenizer(br.readLine());
 		management.delete(Integer.parseInt(st.nextToken()));
-		management.list();
+		list = management.list();
+		System.out.println("----상품 조회----");
+		for (Product p : list) {
+			System.out.println(p);
+		}
 
 		// 특정 가격 이하의 상품만 검색
 		System.out.println("\n얼마 이하의 상품을 검색하고 싶은지 적어주세요.");
 		st = new StringTokenizer(br.readLine());
-		management.priceList(Integer.parseInt(st.nextToken()));
+		Product[] priceList = management.priceList(Integer.parseInt(st.nextToken()));
+		System.out.println("----상품 조회----");
+		for (Product p : priceList) {
+			System.out.println(p);
+		}
+
 	}
 
 }
