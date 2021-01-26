@@ -18,16 +18,31 @@ public class ProductTest {
 		st = new StringTokenizer(br.readLine());
 		int n = Integer.parseInt(st.nextToken());
 
-		System.out.println("\n입력하고자 하는 상품의 상품번호, 상품이름, 가격, 수량 정보를 적어주세요. (상품은 엔터로 구분)");
+		System.out.println("\n입력하고자 하는 상품의 종류, 상품번호, 상품이름, 가격, 수량 정보를 적어주세요. (상품은 엔터로 구분)");
+		System.out.println("Product: 1, TV: 2, Refrigerator: 3");
+
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			management.add(new Product(Integer.parseInt(st.nextToken()), st.nextToken(),
-					Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+			switch (Integer.parseInt(st.nextToken())) {
+			case 1:
+				management.add(new Product(Integer.parseInt(st.nextToken()), st.nextToken(),
+						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+				break;
+			case 2:
+				management.add(new TV(Integer.parseInt(st.nextToken()), st.nextToken(),
+						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+				break;
+			case 3:
+				management.add(new Refrigerator(Integer.parseInt(st.nextToken()), st.nextToken(),
+						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+				break;
+
+			}
 		}
 
 		// 상품 조회
-		Product[] list = management.list();
 		System.out.println("----상품 조회----");
+		Product[] list = management.list();
 		for (Product p : list) {
 			System.out.println(p);
 		}
@@ -38,12 +53,35 @@ public class ProductTest {
 		System.out.println("----검색 결과----");
 		System.out.println(management.list(Integer.parseInt(st.nextToken())));
 
+		// 상품명으로 검색
+		System.out.println("\n검색하고자 하는 상품의 상품명을 적어주세요.(부분 검색 가능)");
+		st = new StringTokenizer(br.readLine());
+		System.out.println("----검색 결과----");
+		list = management.list(st.nextToken());
+		for (Product p : list) {
+			System.out.println(p);
+		}
+
+		// TV 정보만 조회
+		System.out.println("\n----TV 상품 조회----");
+		list = management.getTVList();
+		for (Product p : list) {
+			System.out.println(p);
+		}
+
+		// Refrigerator 정보만 조회
+		System.out.println("\n----Refrigerator 상품 조회----");
+		list = management.getRefrigeratorList();
+		for (Product p : list) {
+			System.out.println(p);
+		}
+
 		// 상품 번호로 삭제
 		System.out.println("\n삭제하고자 하는 상품의 상품번호를 적어주세요.");
 		st = new StringTokenizer(br.readLine());
 		management.delete(Integer.parseInt(st.nextToken()));
-		list = management.list();
 		System.out.println("----상품 조회----");
+		list = management.list();
 		for (Product p : list) {
 			System.out.println(p);
 		}
@@ -56,6 +94,10 @@ public class ProductTest {
 		for (Product p : priceList) {
 			System.out.println(p);
 		}
+
+		// 전체 재고 상품 금액의 합
+		System.out.println("\n----전체 재고 상품 금액의 합----");
+		System.out.printf("%d원\n", management.getSumOfProduct());
 
 	}
 

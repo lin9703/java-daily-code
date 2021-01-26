@@ -40,6 +40,60 @@ public class ProductMgr {
 		return null;
 	}
 
+	// 상품명으로 검색
+	public Product[] list(String sname) {
+		int count = 0;
+		for (int i = 0; i < cnt; i++) {
+			if (products[i].getProductName().contains(sname)) {
+				count++;
+			}
+		}
+
+		Product[] result = new Product[count];
+		for (int i = 0, j = 0; i < cnt; i++) {
+			if (products[i].getProductName().contains(sname)) {
+				result[j++] = products[i];
+			}
+		}
+		return result;
+	}
+
+	// TV 정보만 검색
+	public Product[] getTVList() {
+		int count = 0;
+		for (int i = 0; i < cnt; i++) {
+			if (products[i] instanceof TV) {
+				count++;
+			}
+		}
+
+		Product[] result = new Product[count];
+		for (int i = 0, j = 0; i < cnt; i++) {
+			if (products[i] instanceof TV) {
+				result[j++] = products[i];
+			}
+		}
+		return result;
+	}
+
+	// Refrigerator 정보만 검색
+	public Product[] getRefrigeratorList() {
+		int count = 0;
+		for (int i = 0; i < cnt; i++) {
+			if (products[i] instanceof Refrigerator) {
+				count++;
+			}
+		}
+
+		Product[] result = new Product[count];
+		for (int i = 0, j = 0; i < cnt; i++) {
+			if (products[i] instanceof Refrigerator) {
+				result[j++] = products[i];
+			}
+		}
+		return result;
+	}
+
 	// 상품 번호로 삭제
 	public void delete(int num) {
 		for (int i = 0; i < cnt; i++) {
@@ -69,6 +123,15 @@ public class ProductMgr {
 		}
 
 		return result;
+	}
+
+	// 전체 재고 상품 금액의 합
+	public long getSumOfProduct() {
+		long sum = 0;
+		for (int i = 0; i < cnt; i++) {
+			sum += products[i].getPrice() * products[i].getQuantity();
+		}
+		return sum;
 	}
 
 }
