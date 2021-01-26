@@ -7,10 +7,10 @@ public class Book {
 	private String publisher;
 	private int price;
 	private String desc;
-	
+
 	public Book() {
 	}
-	
+
 	public Book(String isbn, String title, String author, String publisher, int price, String desc) {
 		super();
 		this.isbn = isbn;
@@ -71,8 +71,8 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return String.format("%8s | %s\t | %4s | %-10s | %6d | %-10s", 
-	               this.isbn, this.title, this.author, this.publisher, this.price, this.desc);
+		return String.format("%8s | %s\t | %4s | %-10s | %6d | %-10s", this.isbn, this.title, this.author,
+				this.publisher, this.price, this.desc);
 	}
-	
+
 }
