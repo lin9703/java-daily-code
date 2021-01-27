@@ -7,9 +7,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- * input: 100 미만의 양의 정수들 
- * output: 정수들의 십의 자리 숫자의 개수 
- * condition: 0이 입력되면 종료
+ * input: 100 미만의 양의 정수들 output: 정수들의 십의 자리 숫자의 개수 condition: 0이 입력되면 종료
  */
 public class DigitTest1 {
 

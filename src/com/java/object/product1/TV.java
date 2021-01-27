@@ -14,7 +14,6 @@ public class TV extends Product {
 		this.displayType = displayType;
 	}
 
-	
 	public int getInch() {
 		return inch;
 	}
@@ -33,10 +32,8 @@ public class TV extends Product {
 
 	@Override
 	public String toString() {
-		return "TV [productNo=" + getProductNo() + ", productName=" + getProductName()
-				+ ", price=" + getPrice() + ", quantity=" + getQuantity()
-				+ ", inch=" + inch + ", displayType=" + displayType + "]";
+		return "TV [productNo=" + getProductNo() + ", productName=" + getProductName() + ", price=" + getPrice()
+				+ ", quantity=" + getQuantity() + ", inch=" + inch + ", displayType=" + displayType + "]";
 	}
-	
 
 }

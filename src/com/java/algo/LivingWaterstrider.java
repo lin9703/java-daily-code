@@ -55,14 +55,14 @@ public class LivingWaterstrider {
 						x += (dx[direction] * count);
 						y += (dy[direction] * count);
 						count--;
-						
+
 					} else {
 						break;
 					}
 				}
 
 			}
-			
+
 			System.out.println("#" + test_case + " " + answer);
 		}
 
