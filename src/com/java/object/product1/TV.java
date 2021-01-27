@@ -9,11 +9,13 @@ public class TV extends Product {
 	public TV(int productNo, String productName, int price, int quantity) {
 		super(productNo, productName, price, quantity);
 	}
+	
 
 	@Override
 	public String toString() {
-		return "TV [productNo=" + getProductNo() + ", productName=" + getProductName() + ", price=" + getPrice()
-				+ ", quantity=" + getQuantity() + "]";
+		return "TV [productNo=" + getProductNo() + ", productName=" + getProductName()
+				+ ", price=" + getPrice() + ", quantity=" + getQuantity() + "]";
 	}
+	
 
 }

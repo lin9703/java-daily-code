@@ -12,8 +12,8 @@ public class Refrigerator extends Product {
 
 	@Override
 	public String toString() {
-		return "Refrigerator [productNo=" + getProductNo() + ", productName=" + getProductName() + ", price="
-				+ getPrice() + ", quantity=" + getQuantity() + "]";
+		return "Refrigerator [productNo=" + getProductNo() + ", productName=" + getProductName()
+				+ ", price=" + getPrice() + ", quantity=" + getQuantity() + "]";
 	}
-
+	
 }

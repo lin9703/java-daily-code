@@ -23,7 +23,7 @@ public class ProductTest {
 
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			switch (Integer.parseInt(st.nextToken())) {
+			switch(Integer.parseInt(st.nextToken())) {
 			case 1:
 				management.add(new Product(Integer.parseInt(st.nextToken()), st.nextToken(),
 						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
@@ -36,7 +36,7 @@ public class ProductTest {
 				management.add(new Refrigerator(Integer.parseInt(st.nextToken()), st.nextToken(),
 						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
 				break;
-
+				
 			}
 		}
 
@@ -94,10 +94,11 @@ public class ProductTest {
 		for (Product p : priceList) {
 			System.out.println(p);
 		}
-
+		
 		// 전체 재고 상품 금액의 합
 		System.out.println("\n----전체 재고 상품 금액의 합----");
 		System.out.printf("%d원\n", management.getSumOfProduct());
+
 
 	}
 

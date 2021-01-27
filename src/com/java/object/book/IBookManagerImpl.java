@@ -2,20 +2,20 @@ package com.java.object.book;
 
 import java.util.Arrays;
 
-public class BookManager {
+public class IBookManagerImpl implements IBookManager {
 	static private int MAX_SIZE = 100;
 	// Magazine class를 저장하기 위한 별도의 변경 사항 없음 (다형성)
 	private Book[] books = new Book[MAX_SIZE];
 	private int size;
 
-	private static BookManager manager;
+	private static IBookManagerImpl manager;
 
-	private BookManager() {
+	private IBookManagerImpl() {
 	}
 
-	public static BookManager getInstance() {
+	public static IBookManagerImpl getInstance() {
 		if (manager == null) {
-			manager = new BookManager();
+			manager = new IBookManagerImpl();
 		}
 		return manager;
 	}
