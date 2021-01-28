@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import com.java.object.product1.exception.CodeNotFoundException;
+import com.java.object.product1.exception.DuplicateException;
+import com.java.object.product1.exception.ProductNotFoundException;
+
 public class ProductTest {
 
 	public static void main(String[] args) throws IOException {
@@ -24,22 +28,26 @@ public class ProductTest {
 
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			switch (Integer.parseInt(st.nextToken())) {
-			case 1:
-				management.addProduct((new Product(Integer.parseInt(st.nextToken()), st.nextToken(),
-						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()))));
-				break;
-			case 2:
-				management.addProduct(new TV(Integer.parseInt(st.nextToken()), st.nextToken(),
-						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
-						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
-				break;
-			case 3:
-				management.addProduct(new Refrigerator(Integer.parseInt(st.nextToken()), st.nextToken(),
-						Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
-						Integer.parseInt(st.nextToken())));
-				break;
 
+			try {
+				switch (Integer.parseInt(st.nextToken())) {
+				case 1:
+					management.addProduct((new Product(Integer.parseInt(st.nextToken()), st.nextToken(),
+							Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()))));
+					break;
+				case 2:
+					management.addProduct(new TV(Integer.parseInt(st.nextToken()), st.nextToken(),
+							Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
+							Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+					break;
+				case 3:
+					management.addProduct(new Refrigerator(Integer.parseInt(st.nextToken()), st.nextToken(),
+							Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
+							Integer.parseInt(st.nextToken())));
+					break;
+				}
+			} catch (DuplicateException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -54,7 +62,11 @@ public class ProductTest {
 		System.out.println("\n검색하고자 하는 상품의 상품번호를 적어주세요.");
 		st = new StringTokenizer(br.readLine());
 		System.out.println("----검색 결과----");
-		System.out.println(management.getList(Integer.parseInt(st.nextToken())));
+		try {
+			System.out.println(management.getList(Integer.parseInt(st.nextToken())));
+		} catch (CodeNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		// 상품명으로 검색
 		System.out.println("\n검색하고자 하는 상품의 상품명을 적어주세요.(부분 검색 가능)");
@@ -80,19 +92,29 @@ public class ProductTest {
 		}
 
 		// Refrigerator 정보만 검색 (일정 용량 이상)
+		list.clear();
 		System.out.println("\nRefrigerator의 용량 기준을 적어주세요.");
 		st = new StringTokenizer(br.readLine());
 		System.out.println("----검색 결과----");
-		list = management.getRefrigeratorListUsingCapacity(Integer.parseInt(st.nextToken()));
+		try {
+			list = management.getRefrigeratorListUsingCapacity(Integer.parseInt(st.nextToken()));
+		} catch (ProductNotFoundException e) {
+			e.printStackTrace();
+		}
 		for (Product p : list) {
 			System.out.println(p);
 		}
 
 		// TV 정보만 검색 (일정 인치 이상)
+		list.clear();
 		System.out.println("\nTV의 인치 기준을 적어주세요.");
 		st = new StringTokenizer(br.readLine());
 		System.out.println("----검색 결과----");
-		list = management.getTVListUsingInch(Integer.parseInt(st.nextToken()));
+		try {
+			list = management.getTVListUsingInch(Integer.parseInt(st.nextToken()));
+		} catch (ProductNotFoundException e) {
+			e.printStackTrace();
+		}
 		for (Product p : list) {
 			System.out.println(p);
 		}

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.java.object.product1.exception.CodeNotFoundException;
+import com.java.object.product1.exception.DuplicateException;
+import com.java.object.product1.exception.ProductNotFoundException;
+
 public class ProductMgrImpl implements IProductMgr {
 	private List<Product> products = new ArrayList<>();
 
@@ -20,7 +24,12 @@ public class ProductMgrImpl implements IProductMgr {
 	}
 
 	@Override
-	public void addProduct(Product p) {
+	public void addProduct(Product p) throws DuplicateException {
+		for (Product product : products) {
+			if (product.getProductNo() == p.getProductNo()) {
+				throw new DuplicateException();
+			}
+		}
 		products.add(p);
 	}
 
@@ -30,13 +39,13 @@ public class ProductMgrImpl implements IProductMgr {
 	}
 
 	@Override
-	public Product getList(int productNo) {
+	public Product getList(int productNo) throws CodeNotFoundException {
 		for (Product p : products) {
 			if (p.getProductNo() == productNo) {
 				return p;
 			}
 		}
-		return null;
+		throw new CodeNotFoundException(productNo);
 	}
 
 	@Override
@@ -73,25 +82,25 @@ public class ProductMgrImpl implements IProductMgr {
 	}
 
 	@Override
-	public List<Product> getRefrigeratorListUsingCapacity(int capacity) {
+	public List<Product> getRefrigeratorListUsingCapacity(int capacity) throws ProductNotFoundException {
 		List<Product> result = new ArrayList<>();
 		for (Product p : products) {
 			if (p instanceof Refrigerator && ((Refrigerator) p).getCapacity() >= 400) {
 				result.add(p);
 			}
 		}
-		return result;
+		throw new ProductNotFoundException();
 	}
 
 	@Override
-	public List<Product> getTVListUsingInch(int inch) {
+	public List<Product> getTVListUsingInch(int inch) throws ProductNotFoundException {
 		List<Product> result = new ArrayList<>();
 		for (Product p : products) {
 			if (p instanceof TV && ((TV) p).getInch() >= 50) {
 				result.add(p);
 			}
 		}
-		return result;
+		throw new ProductNotFoundException();
 	}
 
 	@Override
