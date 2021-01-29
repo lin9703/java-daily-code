@@ -19,4 +19,6 @@ public interface IBookManager {
 	public int getTotalPrice();
 
 	public double getAvgPrice();
+
+	void save();
 }

@@ -111,4 +111,8 @@ public class IBookManagerImplUsingArray implements IBookManager {
 	public double getAvgPrice() {
 		return 1.0 * getTotalPrice() / size;
 	}
+
+	@Override
+	public void save() {
+	}
 }

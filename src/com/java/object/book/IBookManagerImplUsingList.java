@@ -1,15 +1,23 @@
 package com.java.object.book;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class IBookManagerImplUsingList implements IBookManager {
-	List<Book> books = new ArrayList<>();
+	private List<Book> books = null;
+	private String file = "./src/com/java/object/book/book.dat";
 
 	// singleton
 	private static IBookManagerImplUsingList manager;
 
 	private IBookManagerImplUsingList() {
+		load();
 	}
 
 	public static IBookManagerImplUsingList getInstance() {
@@ -17,6 +25,33 @@ public class IBookManagerImplUsingList implements IBookManager {
 			manager = new IBookManagerImplUsingList();
 		}
 		return manager;
+	}
+
+	// ./book.data에서 목록 정보를 읽어서 설정
+	@SuppressWarnings("unchecked")
+	private void load() {
+		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
+			Object obj = input.readObject();
+			if (obj != null && obj instanceof List) {
+				books = (List<Book>) obj;
+				System.out.println("기존 데이터 복원");
+			}
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			books = new ArrayList<>();
+			System.out.println("기존 정보가 없어서 새로 생성");
+		}
+		System.out.println("초기화 종료");
+	}
+
+	@Override
+	public void save() {
+		try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
+			output.writeObject(books);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("저장 완료");
 	}
 
 	@Override

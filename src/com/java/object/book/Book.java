@@ -1,6 +1,8 @@
 package com.java.object.book;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 	private String isbn;
 	private String title;
 	private String author;
