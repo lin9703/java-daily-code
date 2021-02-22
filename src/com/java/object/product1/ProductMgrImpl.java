@@ -1,23 +1,27 @@
 package com.java.object.product1;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.java.object.book.Book;
 import com.java.object.product1.exception.CodeNotFoundException;
 import com.java.object.product1.exception.DuplicateException;
 import com.java.object.product1.exception.ProductNotFoundException;
 
 public class ProductMgrImpl implements IProductMgr {
-	private List<Product> products = new ArrayList<>();
+	private List<Product> products = null;
 	private String file = "./src/com/java/object/product1/product.dat";
 
 	private static ProductMgrImpl productMgr;
 
 	private ProductMgrImpl() {
+		load();
 	}
 
 	public static ProductMgrImpl getInstance() {
@@ -25,6 +29,21 @@ public class ProductMgrImpl implements IProductMgr {
 			productMgr = new ProductMgrImpl();
 		}
 		return productMgr;
+	}
+	
+	private void load() {
+		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
+			Object obj = input.readObject();
+			if (obj != null && obj instanceof List) {
+				products = (List<Product>) obj;
+				System.out.println("기존 데이터 복원");
+			}
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			products = new ArrayList<>();
+			System.out.println("기존 정보가 없어서 새로 생성");
+		}
+		System.out.println("초기화 종료");
 	}
 	
 	@Override
