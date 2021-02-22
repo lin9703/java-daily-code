@@ -30,32 +30,45 @@ public class ProductMgrImpl implements IProductMgr {
 		}
 		return productMgr;
 	}
-	
+
 	private void load() {
-		try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
-			Object obj = input.readObject();
-			if (obj != null && obj instanceof List) {
-				products = (List<Product>) obj;
-				System.out.println("기존 데이터 복원");
+		Thread t = new Thread(() -> {
+			try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(file))) {
+				Object obj = input.readObject();
+				if (obj != null && obj instanceof List) {
+					products = (List<Product>) obj;
+					System.out.println("기존 데이터 복원");
+				}
+			} catch (IOException | ClassNotFoundException e) {
+				e.printStackTrace();
+				products = new ArrayList<>();
+				System.out.println("기존 정보가 없어서 새로 생성");
 			}
-		} catch (IOException | ClassNotFoundException e) {
+			System.out.println("초기화 종료");
+		});
+
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
 			e.printStackTrace();
-			products = new ArrayList<>();
-			System.out.println("기존 정보가 없어서 새로 생성");
 		}
-		System.out.println("초기화 종료");
 	}
-	
+
 	@Override
 	public void save() {
-		try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
-			output.writeObject(products);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("저장 완료");
+		Thread t = new Thread(() -> {
+			try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
+				output.writeObject(products);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("저장 완료");
+		});
+
+		t.start();
 	}
-	
+
 	@Override
 	public void addProduct(Product p) throws DuplicateException {
 		for (Product product : products) {
