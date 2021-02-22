@@ -7,6 +7,8 @@ import com.java.object.product1.exception.DuplicateException;
 import com.java.object.product1.exception.ProductNotFoundException;
 
 public interface IProductMgr {
+	// 파일에 상품 정보 저장 
+	void save();
 
 	// 상품 저장
 	void addProduct(Product p) throws DuplicateException;

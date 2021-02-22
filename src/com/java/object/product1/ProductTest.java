@@ -151,7 +151,10 @@ public class ProductTest {
 		// 전체 재고 상품 금액의 합
 		System.out.println("\n----전체 재고 상품 금액의 합----");
 		System.out.printf("%d원\n", management.getSumOfProduct());
-
+		
+		// 파일에 상품 정보 저장
+		System.out.println("\n----상품 정보 파일에 저장----");
+		management.save();
 	}
 
 }

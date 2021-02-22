@@ -1,5 +1,8 @@
 package com.java.object.product1;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +13,7 @@ import com.java.object.product1.exception.ProductNotFoundException;
 
 public class ProductMgrImpl implements IProductMgr {
 	private List<Product> products = new ArrayList<>();
+	private String file = "./src/com/java/object/product1/product.dat";
 
 	private static ProductMgrImpl productMgr;
 
@@ -22,7 +26,17 @@ public class ProductMgrImpl implements IProductMgr {
 		}
 		return productMgr;
 	}
-
+	
+	@Override
+	public void save() {
+		try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(file))) {
+			output.writeObject(products);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("저장 완료");
+	}
+	
 	@Override
 	public void addProduct(Product p) throws DuplicateException {
 		for (Product product : products) {
